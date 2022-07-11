@@ -1,33 +1,87 @@
 <div class="container py-5">
-  <div class="row">
+  <div class="rounded shadow p-5 d-Flex">
+    
+    <div>
+      <img src="/assets/book.svg" width="250">
+      <h3 class="text-primary">Bienvenidos al sistema de Libros</h3>
+      <h5 class="text-secondary">
+        Con esta aplicacion podras consultar, crear, actualizar y eliminar tus libros.
+      </h5>
+      <hr>
+
+      <p class="text-muted">
+        Esta aplicacion fue desarrollada con Spring Boot, Angular y DB
+      </p>
+    </div>
+  </div>
+
+  <div class="row mt-5">
     <div class="col-md-6">
       <h3>Lista de Libros disponibles</h3>
-    <div class="my-5">
+    <div class="my  -5">
       <div  *ngFor="let book of books" class="card mb-3">
         <div class="card-body">
 
           <div clas="d-flex justify-content-between">
+            <div class="fw-bold">{{book.isbn}}</div>
             <div class="fw-bold">{{book.title}}</div>
+            <div class="fw-bold">Autor: {{book.author}}</div>
+            <div class="fw-bold">Editorial: {{book.editorial}}</div>
+            <div class="fw-bold">Cantidad de paginas: {{book.nroPag}}</div>
+            
 
             <div class="text-muted">
-                <i class="fa fa-edit cursor-pointer" title="Editar"></i>
-                <i class="fa fa-trash m-2 cursor-pointer" title="Eliminar Libro"></i>
+                <i class="fa fa-edit cursor-pointer" title="Editar" (click)="edit(book)"></i>
+                <i class="fa fa-trash ms-2 cursor-pointer" title="Eliminar Libro" (click)="delete(book)"></i>
               </div>
 
           </div>      
     </div>
       </div>
     </div>
-
-    
-
-
-
-
-    
-  
     </div>
   
+
+    <div class="col-md-6">
+      <h3>{{ book.id ? 'Editar' : 'Crear Nuevo ' }} Libro</h3>
+      <form class="mt-5" (ngSubmit)="save()">
+        <div class="mb-3 form-floating" >
+          <input id="titulo" type="text" placeholder="Titulo" name="titulo" class="form-control" [(ngModel)]="book.title">
+          <label for="titulo">Titulo</label>
+        </div>
+
+        <div class="mb-3 form-floating">
+          <input id="autor" type="text" placeholder="Autor" name="autor" class="form-control" [(ngModel)]="book.author">
+          <label for="autor">Autor</label>
+        </div>
+
+        <div class="mb-3 form-floating">
+          <input id="isbn" type="text" placeholder="isbn" name="isbn" class="form-control" [(ngModel)]="book.isbn">
+          <label for="isbn">ISBN</label>
+        </div>
+
+        <div class="mb-3 form-floating">
+          <input id="editorial" type="text" placeholder="editorial" name="editorial" class="form-control" [(ngModel)]="book.editorial">
+          <label for="editorial">Editorial</label>
+        </div>
+
+        <div class="mb-3 form-floating">
+          <input id="nroPag" type="text" placeholder="nroPag" name="nroPag" class="form-control" [(ngModel)]="book.pageNumbers">
+          <label for="nroPag">Numero de Paginas</label>
+        </div>
+  
+        <div class="text-end">
+          <button class="btn btn-primary btn-lg">Guardar</button>
+  
+        </div>
+      </form>
+      
+    </div>
+
   </div>
+
+ 
   
 </div>
+
+
